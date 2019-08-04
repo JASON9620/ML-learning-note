@@ -1,0 +1,91 @@
+机器学习的分类：
+	监督学习(supervised learning)
+	无监督学习(unsupervised learning)
+	强化学习(reinforcement learning)
+	半监督学习(semi-supervised learning)
+	深度学习(deep learning)
+
+python Scikit-learn
+	依赖于python的Numpy,Scipy和matplotlib库
+	开源、可复用
+
+scikit-learn 常用函数
+	分类  异常检测，图像识别等  knn,svm
+	聚类  图像分割，群体划分 k-means,谱聚类
+	回归  价格预测，趋势预测 线性回归，svr
+	降维  可视化 pca,nmf
+
+分类任务
+	最近邻算法 neighbor.NearestNeighbors
+	支持向量机 svm.SVC
+	朴素贝叶斯 naive_beyes.GaussianNB
+	决策树 tree.DecisionTreeClassifier
+	集成方法 ensemble.BaggingClassifier
+	神经网络 neural_network.MLPClassifier
+
+回归任务
+	岭回归  linear_model.Ridge
+	lasso回归  linear_model.Lasso
+	弹性网络  linear_model.ElasticNet
+	最小角回归  linear_model.Lars
+	贝叶斯回归  linear_model.BayesianRidge
+	逻辑回归  linear_model.LogisticRegression
+	多项式回归  preprocessing.PolynomialFeatures
+
+聚类方法
+	K-means  cluster.KMeans  参数：聚类个数 点间距离
+	AP聚类  cluster.AffinityPropagation 
+	均值漂移  cluster.MeanShift
+	层次聚类  cluster.AgglomerativeClustering
+	DBSCAN  cluster.DBSCAN  参数：领域大小 点间距离
+	BIRCH  cluster.Birth  参数：分支因子，阈值等其他超参 欧氏距离
+	谱聚类  cluster.SpectralClustering
+
+降维任务
+	主成分分析  decomposition.PCA  信号处理
+	截断SVD和LSA  decomposition.TruncatedSVD
+	字典学习  decomposition.SparseCoder
+	因子分析  decomposition.FactorAnalysis
+	独立成分分析  decomposition.FastICA  图形图像特征提取
+	非负矩阵分解  decomposition.NMF  图形图像特征提取
+	LDA  decomposition.LatentDirichletAllocation  文本数据，主题挖掘
+
+sklearn库中的分类算法并未统一封装在一个子模块中，因此对分类算法的import方式各有不同
+
+sklearn分类函数：
+	k近邻（knn）
+	朴素贝叶斯（naivebayes）
+	支持向量机（svm）
+	决策树(decision)
+	神经网络模型（neural networks)
+		包括线性分类器和非线性分类器
+
+sklearn提供的回归函数主要被封装在两个子模块中
+	sklearn.linear_model（封装的是线性函数）  
+	sklearn.preprocessing
+
+线性回归函数：
+	普通线性回归函数（linearRegression）
+	岭回归（Ridge）
+	lasso（Lasso）
+
+	
+0720
+聚类算法函数包含在sklearn.cluster模块中
+	K-means, 近邻传播算法,DBSCAN
+同样的数据集应用于不同的算法可能会得到不同的结果，消耗的时间也不尽相同
+
+DBSCAN算法
+	核心点 领域内点超过MinPts个
+	边界点 领域内点不超过MinPts个，但在核心点的领域内
+	噪声点 既不是核心点，也不是边界点
+先找核心点，再找边界点
+
+0804
+某些样本可能到两个核心对象的距离都小于Eps，但是这两个核心对象由于不是密度直达，不属于同一个聚类簇。一般来说，此时DBSCAN采用先来后到，先进行聚类的类别簇会标记这个样本为它的类别。DBSCAN 的算法不是完全稳定的算法
+
+PCA
+协方差用于度量两个变量之间的线性相关性程度（公式变形之后很容易发现）
+Singular Value Decomposition 奇异值分解
+
+
