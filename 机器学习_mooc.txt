@@ -50,24 +50,9 @@ scikit-learn 常用函数
 	非负矩阵分解  decomposition.NMF  图形图像特征提取
 	LDA  decomposition.LatentDirichletAllocation  文本数据，主题挖掘
 
-sklearn库中的分类算法并未统一封装在一个子模块中，因此对分类算法的import方式各有不同
 
-sklearn分类函数：
-	k近邻（knn）
-	朴素贝叶斯（naivebayes）
-	支持向量机（svm）
-	决策树(decision)
-	神经网络模型（neural networks)
-		包括线性分类器和非线性分类器
 
-sklearn提供的回归函数主要被封装在两个子模块中
-	sklearn.linear_model（封装的是线性函数）  
-	sklearn.preprocessing
 
-线性回归函数：
-	普通线性回归函数（linearRegression）
-	岭回归（Ridge）
-	lasso（Lasso）
 
 	
 0720
@@ -92,4 +77,57 @@ Singular Value Decomposition 奇异值分解
 NMF（非负矩阵分解）
 V=W*H W特征矩阵 H系数矩阵
 NMF能够广泛应用于图像分析、文本挖掘和语音处理领域
+
+0915
+分类：当输出是离散的，学习任务为分类任务
+回归：当输出是连续的，学习任务为回归任务
+
+训练集/测试集的划分方法：交叉验证法、自助法用来评估分类模型
+准确率
+精确率
+召回率
+
+sklearn库中的分类算法并未统一封装在一个子模块中，因此对分类算法的import方式各有不同
+
+sklearn分类函数：
+	k近邻（knn）
+	朴素贝叶斯（naivebayes）
+	支持向量机（svm）
+	决策树(decision)
+	神经网络模型（neural networks)
+		包括线性分类器和非线性分类器
+
+sklearn提供的回归函数主要被封装在两个子模块中
+	sklearn.linear_model（封装的是线性函数）  
+	sklearn.preprocessing（非线性回归函数）
+
+线性回归函数：
+	普通线性回归函数（linearRegression）
+	岭回归（Ridge）
+	lasso（Lasso）
+	非线性回归函数
+		多项式回归
+
+knn
+k取值过大，导致较远的点对预测产生影响，欠拟合
+k取值过小，如果邻居是噪声点，过拟合
+	一般情况，倾向于选取较小的k值，采用交叉验证的方法来选取最优的k值
+
+决策树
+树形结构的分类器，通过顺序询问分类点的属性，决定分类点最终的类别（通常根据特征的信息增益或者其他指标）
+
+朴素贝叶斯
+
+1015
+data = pd.read_csv() 对于Python的本身操作，也需要加强学习，多做项目，熟能生巧
+
+1024
+回归（线性回归、多项式回归、岭回归）
+
+数字手写体的分类器：
+	线性分类器  k近邻分类器
+	非线性分类器 svm
+	mlp多层感知器 卷积神经网络
+	
+
 
