@@ -1,0 +1,12 @@
+1.一组新闻文章可以被处理为一张词频表
+web框架 Django(python)
+Python是一种解释型编程语言
+对于高并发、多线程的应用程序而言（尤其是拥有许多计算密集型线程的应用程序），Python并不是一种理想的编程语言。
+Python有一个叫做全局解释器锁（GIL）的东西，这是一种防止解释器同时执行多条Python字节码指令的机制
+Numpy提供快速的数组处理能力
+对于数值型数据，Numpy数组在存储和处理数据时，要比内置的Python数据结构高效的多
+pandas提供了是我们能够快便捷的处理结构化数据的大量数据结构和函数
+SciPy是一组专门解决科学计算中各种标准问题域的包的集合
+Python解释器：cython Ironpython Jython Pypy
+官方Python解释器为cython（基于c语言的Python解释器）
+

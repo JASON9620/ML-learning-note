@@ -14,4 +14,74 @@ Python基操
 （避免‘和”的歧义，在它们前面插入\，\n表示换行，\t表示制表符，\\表示\本身；多行字符使用””””””；在’’前加上r，里面的字符就不需要转义了）
 布尔值False（0、’’、None）
 布尔值True（其他数值和非空字符串）
+
+===2019.10.28===
 3.列表list
+索引访问L[0]
+倒序访问L[-1]
+末尾添加新元素L.append('Bob')
+指定索引添加新元素L.insert(0,'Bob')
+末尾删除元素L.pop()
+指定索引删除元素L.pop(0)
+替换元素L[0] = 'Bob'
+
+正序切片L[1:3] L[:3] L[::2]
+倒序切片L[-4:-1]
+字符串切片 'abandon'[:3]
+
+列表生成式 L = [x*x for x in range(10)]   range(1,11)  range(10)从0开始计数，不包括10
+
+4.元组tuple（tuple创建完成不能修改）
+索引访问t[0]
+创建单元素元祖 t = ('Bob',)
+
+5.if语句
+if
+if else
+if elif
+if elif else
+
+6.for循环
+for name in L  L是迭代体，常见的为列表list、元组tuple
+
+7.while break continue
+
+8.字典dict
+访问d['Bob']   d.get('Bob')防止报错
+dict的特点：
+	查找速度快、key-value序对没有顺序、key值必须不可变（基本类型如字符串、整数、浮点数都是不可变的，tuple也是不可变的）
+增加或修改key-value序对 d['Bob'] = 90
+遍历dict  
+	for key in d:
+		print(key, ':', d[key])
+遍历dict的value
+	for v in d.values():
+		print(v)
+或  for v in d.itervalues():
+		print(v)
+遍历dict的key和value
+	for key,value in d.items():
+		print(key,':', value)
+或  for key,value in d.iteritems():
+		print(key,':', value)
+
+9.集合set(set中元素是无序的,且存放元素必须是不可变的，区分大小写)
+创建set s = set([1,2,3])
+判断元素是否在set中  'Bob' in s 在则返回True
+遍历set
+	for name in s:
+		print(name)
+增加元素 s.add('Bob')
+删除元素 s.remove('Bob')
+
+10.函数（函数可返回多值）
+传入可变参数
+	def fn(*args):
+		print(args)
+
+11.enumerate函数（为列表list增加索引）
+	for index, name in enumerate(L):
+		print(index, '-', name)
+
+
+
