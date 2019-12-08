@@ -1,0 +1,41 @@
+工具 算法 代码 基础原理（包括数据结构、进程线程等）
+云计算是并行计算、分布式计算及网格计算的发展
+云计算是虚拟化、效用计算、将基础设施作为服务（IaaS）、将平台作为服务（PaaS）、将软件作为服务（SaaS）等概念混合演进并跃升的结果
+
+11.28
+Hadoop是分布式系统基础架构，由Apache基金会开发
+hadoop实现了分布式文件系统(Hadoop Distributed File System HDFS)
+NameNode在FsImage映像文件中存储所有关于文件系统名称空间的信息，EditLog事务文件包含所有事务的记录
+FsImage和EditLog文件需要复制副本，以防文件损坏或NameNode系统丢失
+Hadoop集群是在同一地点用网络互联的一组通用机器
+HDFS集群由一个NameNode和很多个DataNode组成，NameNode是HDFS的主控服务器
+
+11.29
+对于大文件，HDFS采用流式数据访问方式，效率较高
+文件的所有数据块都会有副本(副本数量即复制因子，可配置)
+HDFS采用了多项技术支持文件的可靠存储，这些技术在一定程度上都牺牲了磁盘空间和访问效率，而对于保证系统的可靠性，这种牺牲是划算的
+hadoop适合一次写入、多次读取的数据存储需要
+
+MapReduce
+JobTracker作业服务器(Master) TaskTracker任务服务器(Slave)
+	MapReduce程序定义文件格式、Map操作和Reduce操作，指定HDFS系统中输入/输出文件的位置，启动任务
+Map任务拆分元素，Reduce任务合并元素
+
+HBase
+ZooKeeper file, -ROOT-, -META-, Region  Client访问用户数据的顺序
+HBase可以启动多个HMaster，通过ZooKeeper的Master Election机制保证总有一个Master在运行，但是不能支持Master Server的故障切换，当Master宕机后，整个存储系统就会挂掉
+
+Paxos算法是ZooKeeper的灵魂
+Pig是用来处理大规模数据集的平台，是由雅虎贡献给Apache
+Pig Latin是Pig专用语言，Pig把用户编成的Pig Latin程序编译成MapReduce作业
+
+12.7
+在Linux下安装hadoop，未完成（学习完Linux的操作之后进行安装）
+
+ssh localhost 连接失败
+
+12.8
+集群管理员手动将standbyNamenode切换primaryNameNode
+
+
+

@@ -9,4 +9,226 @@ pandas提供了是我们能够快便捷的处理结构化数据的大量数据�
 SciPy是一组专门解决科学计算中各种标准问题域的包的集合
 Python解释器：cython Ironpython Jython Pypy
 官方Python解释器为cython（基于c语言的Python解释器）
+pd.read_table('ml-1m/movies.dat', sep='::',header = None, names = unames)
+pd.merge(pd.merge(ratings, users), movies)
+pd.read_csv('names/yob1880.txt', names = ['name', 'sex'])
+
+10.31
+Ipython使用指南（Jupyter Notebook使用指南）
+Ipython 执行-探索的工作模式， 其他工具编辑-编译-运行的工作模式
+np.<Tab>  path = 'book/<Tab>' 自动显示所有可选项
+对象内省
+	b? 显示该对象通用信息
+	add_numbers?? 显示函数的源代码
+	np.*load*? 显示含有load的所有函数
+%run ipython_code.py 执行py文件，且其中所有变量和函数都可使用
+%quickref 快速浏览所有魔法命令
+%magic 所有魔法命令的详细文档
+
+%logstart 日志记录开始
+%logstop 日志记录结束
+%logoff 日志记录暂停
+%logon 日志记录继续
+%logstate 查看日志记录状态
+
+%bookmark db E:\JasonWang\python\06_sklearn\ 创建书签
+%bookmark -l 查看所有书签
+
+%time 粗略计算代码运行时间
+%timeit 精确计算代码运行时间
+
+Ipython一次加载模块系统
+	import some_lib
+	reload(some_lib) 
+	或者 dreload(some_lib) 深度重加载，再不行就重启Ipython
+
+代码设计提示
+	扁平结构要比嵌套结构好 zen of python 蛇宗三字经
+	无惧大文件
+Ipython的配置文件ipython_config.py
+
+11.6
+numpy面向数组的编程和思维方式
+ndarray是一个通用的同构数据多维容器
+np.array(data) 转化为数组类型
+np.zeros(10)     np.zeros_like(data)
+np.ones(10)      np.ones_like(data)
+np.empty((3, 6)) np.empty_like(data)
+np.arange(10)
+np.dtype(data1)  data1.dtype 判断数据类型
+np.shape(data2) 判断数据形状
+
+arr1 = np.array([1,2,3], dtype = np.float64)
+arr1 = arr.astype(np.float64)  转换数组类型
+
+大小相等的数组之间的任何算术运算都会将运算应用到元素级，不同大小的数组之间的运算叫做广播
+数组的切片，先切低维轴
+data[True, Flase, True] 布尔索引
+花式索引
+	arr[[1,5,7,2],[:,[0,3,2,1]]]
+	或arr[np.ix_([1,5,7,2],[0,3,1,2])]
+np.random.randn(6,3)
+np.dot(arr.T, arr)
+高级转置
+	np.transport(1,0,2) 括号内输入轴编号
+	np.swapaxes(1,2)  括号内输入一对轴编号
+
+11.8
+通用函数,是一种对ndarray中的数据执行元素级运算的函数
+np.sqrt(arr)
+np.exp(arr)
+np.maximum(x, y)
+条件逻辑
+np.where(cond, arr1, arr2)
+数学统计方法
+arr.sum(0)
+arr.mean(1)
+
+11.14
+np.loadtxt('textname.txt', delimiter=',')
+np.savetxt()?
+np具有完整的其他语言所谓的math包的所有函数功能(例如np.std(arr), np.abs(arr))
+steps.cumsum(1) 在行上进行集聚
+NaN(not a number) 非数字，表示缺失
+pd.isnull()
+pd.notnull()检测缺失值
+数组构成Series,字典构成DataFrame,Series对DataFrame进行精确修改
+Index对象是不可修改的，可重新索引  obj3.reindex(range(6), method = 'ffill')
+索引和索引值是一一对应的，重新索引时，如果某个索引值不存在，就引入缺失值
+ix的标签索引功能 frame.ix[['a','b','c','d'], states]
+data['two'] 列索引
+data.ix['Utah'] 行索引
+data.ix[:, val] 列索引
+data.ix[val, val] 行列同时索引
+
+11.15
+df1 = DataFrame(np.arange(12).reshape(3,4), columns=list('abcd'))
+df1.add(df2, fill_value=0) 大小不同的DataFrame相加
+frame.sort_index(axis=1, ascending=Flase) 对索引进行列降序，默认对行升序
+对Series按值进行排序 obj.order()
+对DataFrame按某列或几列的值进行排序 frame.sort_index(by=['a', 'b'])
+np.nan 空值
+obj.rank(method='first') 按值大小进行排名
+
+11.17
+Series DataFrame的索引可不唯一   obj.index.is_unique
+
+11.22
+data.apply(pd.value_counts).fillna(0) 计算行标签在每列中出现的频数
+fillna(0) 用指定值填充缺失数据
+data.dropna(how = 'all') 只丢弃全是na的行 
+
+输入输出的分类
+	读取文本文件
+	加载数据库中的数据
+	利用web Api操作网络资源
+
+df = pd.read_csv('examples/ex3.csv',sep='\s+', header=None) sep用于去除空白符,且表头和正文的分割方式应一致
+
+列的数量比行的数量少，pd自动判断是列
+
+11.26
+na 也表示缺失
+
+输出csv文件 data.to_csv('out.csv', sep=',') sep默认是,
+对于单字符分隔符文件，可以直接使用Python内置的csv模块 
+                reader = csv.reader(open('ch06/ex7.csv'))
+
+11.27
+HDF5文件 PyTables和h5py处理海量数据
+读取Excel文件
+	xlsx = pd.ExcelFile('examples/ex1.xlsx')
+	pd.read_excel(xlsx, 'Sheet1')
+	或者 frame = pd.read_excel('examples/ex1.xlsx', 'Sheet1')
+写入Excel文件
+	writer = pd.ExcelWriter('examples/ex2.xlsx')
+	frame.to_excel(writer, 'Sheet1')
+	writer.save()
+	或者 frame.to_excel('examples/ex2.xlsx')
+
+pd.merge(df1,df2,on='key',how='outer')  
+inner内连接取交集，left左连接取左边的并集right右连接取右边的并集 outer外连接取所有的并集
+join可以实现索引连接，左连接，以及多Dataframe连接
+pd.concat([s1,s4], axis=1, join='inner') 默认是取并集，inner取交集
+pd.concat([df1,df2], ignore_index=True) 默认对Dataframe进行行连接
+
+11.28
+frame.stack() 行变列
+frame.unstack() 列变行 多层索引从内层开始
+
+12.3
+data.duplicates() 判断是否存在重复行
+data.drop_duplicates() 删除重复行
+替换缺失值
+data.replace([-999, -1000],[np.nan, 0])
+data.replace({-999:np.nan, -1000:0})
+
+np.random随机数函数
+    np.random.rand(d0,d1,...,dn) 生成n维的0-1之间的数组
+	np.random.randn(d0,d1,...,dn) 生成n维的正态分布的数组 
+	np.random.randint（low,high,shape) 
+	np.random.uniform(low,high,size) 均匀分布
+	np.random.normal(loc,scale,size)
+		正态分布，loc均值，scale标准差
+	np.random.poisson(lam,size) lam拉姆他值
+
+pieces = [x.strip() for x in val.split(',')]
+	split分割字符串，strip去除空白符(制表符、空格、换行符等)
+
+内置的re模块负责对字符串应用正则表达式
+re模块的函数分为三大类：模式匹配、替换以及拆分
+
+正则表达式
+pattern='\s+'
+regex = re.compile(pattern, flags=re.IGNORECASE) re.IGNORECASE不区分大小写
+regex.split(text)拆分字符串
+regex.findall(text)
+
+12.4
+打开json文件 db=json.load(open('ch07/food-2011-10-3.json'))
+
+matplotlib
+import matplotlab.pyplot as plt
+创建子图
+fig, axes=plt.subplots(2,2,sharex=True,sharey=True)
+plt.subplots_adjust(wspace=0,hspace=0) 子图间距为0
+axes[1,1].plt() 对子图进行选择
+创建子图（更习惯用法）
+fig=plt.figure()    
+ax=fig.add_subplot(1,1,1)(创建子图的另一种方式)
+
+ax.plot(np.random.randn(30).cumsum(), color='green', linestyle='--',marker='o')
+或者 ax.plot(np.random.randn(30).cumsum(),'go--')
+
+ax.set_title('my first matplotlib plot')
+ax.set_xlable('Stages')
+ax.set_xlim([200,800])
+
+ticks=ax.set_xticks([0,250,500,750,1000])
+lables=ax.set_xticklables(['one','two','three','four','five'], rotation=30,fontsize='small')
+
+创建图例
+ax.plot(randn(1000).cumsum(), 'k', label='one') 传入参数label
+ax.plot(randn(1000).cumsum(), 'k--', label='two')
+ax.plot(randn(1000).cumsum(), 'k.', label='three')
+ax.legend(loc='best') 图例的位置
+
+图片保存
+plt.savefig('figpath.png',dpi=400,bbox_inches='tight')
+
+Series Dataframe直接创建图像
+data.plot()
+
+对时间数据的聚合，也称为重采样(resampling)
+分组运算的术语，"split-apply-combine"(拆分-应用-合并)
+
+df.groupby(['key1','key2']).mean()
+语法糖
+df.groupby(['key1','key2'])[['data1']].mean()
+
+grouped.agg(peak_to_peak) 使用agg调用自己的聚合函数
+
+
+
+
 
