@@ -226,7 +226,125 @@ df.groupby(['key1','key2']).mean()
 语法糖
 df.groupby(['key1','key2'])[['data1']].mean()
 
-grouped.agg(peak_to_peak) 使用agg调用自己的聚合函数
+grouped.agg(peak_to_peak) 使用agg调用自己编的聚合函数
+
+12.8
+list和np.array的区别
+list(range(2, 11))*2 列表向后连接
+np.array(range(2, 11))*2 数组数值乘以2
+
+df.groupby('list').apply(get_func) groupby分组之后应用apply的比较多
+Dataframe的维度表示上，行和列最好最多表示2个维度
+
+透视表就是对行或列进行聚合的表
+pivot_table类似于groupby的聚合函数
+
+大数据完全是炒作的概念，本质就是数据分析，而数据分析的本质在于，统计分析和基于问题背景的数据挖掘
+
+#############################
+特别注意：书中的示例都有完整的数据集和代码，通读此书后可继续完善学习
+#############################
+
+np.random.seed(123) 作用在于使得每次产生的随机数始终相同
+
+
+12.11
+from datetime import datetime
+pd.date_range(start,end,period,freq='BM',normalize=True)
+	period时间长度，freq='BM'频率显示，normalize规范到午夜时间
+
+时间格式：20100401  2010-04-01   4/1/2010
+时区本地化和时区转化
+	ts.tz_localize('UTC')
+	ts.tz_convert(Asia/shanghai)
+
+重采样指的是时间序列从一个频率转换到另一个频率的处理过程，升频是升采样，降频是降采样
+
+12.12
+重采样
+ts.resample('M',how='mean')
+ts.resample('5min', how='sum',closed='left',lable='left')
+	频率5分钟，求和，左闭合，左标签，loffset设置字符串或者日期偏移量(loffset='-1s')
+
+OHLC重采样
+open close high low
+
+移动窗口函数
+rolling_mean(df, 20,min_periods=5) min_periods指的是扩展窗口的长度，20是移动窗口长度
+
+pandas自动对齐数据，手动对齐数据方式 prices.align(volume, join='inner')
+
+###########
+第11章 金融和经济数据应用，尚未仔细阅读实践
+###########
+
+numpy的高级用法
+arr.ravel('C')   
+arr.flatten('F') 数组扁平化处理
+arr.reshape((4,3),order='C')
+arr.reshape((4,3),order='F') C行优先处理，F列优先处理
+
+np.concatenate([arr1,arr2], axis=0) 行连接np.vstack((arr1,arr2))
+np.concatenate([arr1,arr2], axis=1) 列连接np.hstack((arr1,arr2))
+
+np.tile(arr,(3,2))铺瓷砖
+
+depth_means[:,:,np.newaxis] 手动增加新轴，以进行数组之间的运算
+
+广播原则适用于：数组运算、数组索引
+
+accumulate跟reduce的关系就像cumsum跟sum的关系那样
+np.add.accumulate(arr, axis=1)
+np.ufunc.reduce()
+
+numpy.frompyfunc(add_element,2,1) 用于创建ufunc函数
+numpy.vectorize(add_element, otype=[np.float64])
+
+#######
+结构化数组？？？涉及计算机底层结构
+#######
+
+values.argsort() 按值的索引进行排序
+np.lexsort((first_name, last_name)) 对多个键进行排序，键的应用顺序是从最后一个传入算起的
+
+获得面元编号
+lables = bins.searchsorted(data)
+np.digitize(data,bins)
+
+12.17
+不建议使用np.matrix替代正规的ndarray
+PyTable和h5py可以将Numpy的数组数据存储为高效且可压缩的HDF5格式（层次化数据格式）
+
+防报错(优秀代码)
+def attempt_func(x):
+	try:
+		return func(x)
+	except:
+		return x
+
+mapping = dict((v,i) for i,v in enumerate(some_list))
+
+seq=zip（seq1，seq2）压缩（将多个序列（列表、元组等）中的元素“配对”）
+seq1, seq2=zip(*seq) 解压
+
+可哈希性（可散列性）
+
+多元表达式，匿名函数（lambda函数）
+
+func(a,b,c,d=some,e=value)
+a,b,c = args
+d=kwargs.get('d',d_default_value)
+e=kwargs.get('e',e_default_value)
+引用函数时，实际上函数收到的是一个元组args，一个字典kwargs
+def func1(*args,**kwargs):
+	print 'args is',args
+	print 'kwargs is',kwargs
+func1(1,2,k=3) # args is (1,2) kwargs is {'k':3}
+
+迭代器，生成器（yield 不可以直接输出）
+
+#################################
+基础知识部分全部完结，文中案例未执行
 
 
 
